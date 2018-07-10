@@ -18,14 +18,14 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:gravity="center"
-            android:text="GID" />
+            android:text="EngineerID" />
 
         <EditText
-            android:id="@+id/etLAGID"
+            android:id="@+id/etLAEngineerID"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="GID" />
+            android:hint="EngineerID" />
     </LinearLayout>
 
     <LinearLayout
@@ -38,14 +38,14 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:gravity="center"
-            android:text="PASSWORD" />
+            android:text="Password" />
 
         <EditText
-            android:id="@+id/etLAPASSWORD"
+            android:id="@+id/etLAPassword"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="PASSWORD" />
+            android:hint="Password" />
     </LinearLayout>
     <Button
         android:layout_width="wrap_content"
