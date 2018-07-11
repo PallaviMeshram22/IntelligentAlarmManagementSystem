@@ -1,9 +1,10 @@
 package com.siemens.scifive.intelligentalarmmanagementsystem.activities;
 
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
@@ -14,17 +15,25 @@ import com.siemens.scifive.intelligentalarmmanagementsystem.fragments.UserHomeFr
 import com.siemens.scifive.intelligentalarmmanagementsystem.fragments.UserLocationFragment;
 
 public class UserHomeActivity extends AppCompatActivity {
+    private static UserHomeActivity INSTANCE = null;
     FrameLayout fLAUHFragmentContainer;
     TabLayout tLAUHTabs;
+    FragmentManager fragmentManager;
+
+    public static UserHomeActivity getInstance() {
+        return INSTANCE;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_home);
-
+        INSTANCE = this;
 
         fLAUHFragmentContainer = findViewById(R.id.fLAUHFragmentContainer);
         tLAUHTabs = findViewById(R.id.tLAUHTabs);
+
+        fragmentManager = getSupportFragmentManager();
 
         setupTabs();
 
@@ -32,13 +41,13 @@ public class UserHomeActivity extends AppCompatActivity {
     }
 
     private void changeFragment(Fragment fragment, boolean isFirst) {
-        if (isFirst){
+        if (isFirst) {
             //DONT ADD TO BACKSTACK
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fLAUHFragmentContainer, fragment)
                     .commit();
-        }else{
+        } else {
             //ADD TO BACKSTACK
             getSupportFragmentManager()
                     .beginTransaction()
@@ -89,7 +98,7 @@ public class UserHomeActivity extends AppCompatActivity {
                         break;
                     case 3:
                         //showToast("history selected");
-                        changeFragment(HistoryFragment.getInstance(),false);
+                        changeFragment(HistoryFragment.getInstance(), false);
                         break;
                 }
             }

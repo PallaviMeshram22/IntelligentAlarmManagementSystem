@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">IntelligentAlarmManagementSystem</string>
+    <string name="google_maps_api_key">AIzaSyARoUcI_7Q_O4a9-aWgoQdzGIm6TwCuV9U</string>
 </resources>
