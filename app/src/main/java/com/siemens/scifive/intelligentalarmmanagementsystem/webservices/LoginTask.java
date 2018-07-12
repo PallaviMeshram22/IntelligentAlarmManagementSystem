@@ -15,8 +15,8 @@ public class LoginTask {
         Ion
                 .with(mCtx)
                 .load(WSUrls.LOGIN)                 //WILL CHANGE
-                .setJsonPojoBody(requestDTO)
-                //.setStringBody(new Gson().toJson(requestDTO))
+                //.setJsonPojoBody(requestDTO)
+                .setStringBody(new Gson().toJson(requestDTO))
                 .asString()
                 .setCallback(new FutureCallback<String>() {
                     @Override
@@ -51,13 +51,6 @@ public class LoginTask {
             EngineerId = engineerId;
         }
 
-        public String getPassword() {
-            return Password;
-        }
-
-        public void setPassword(String password) {
-            Password = password;
-        }
 
         public RequestDTO() {
 
@@ -66,36 +59,24 @@ public class LoginTask {
         public RequestDTO(String engineerId, String password) {
 
             EngineerId = engineerId;
-            Password = password;
+            //Password = password;
         }
     }
 
     public static class ResponseDTO{
-        String UserId;
+        //String UserId;
         String EngineerID;//z003ur5s
-        String Role;
-        String FirstName;
-        String LastName;
 
         public ResponseDTO() {
         }
 
-        public ResponseDTO(String userId, String engineerID, String role, String firstName, String lastName) {
+        public ResponseDTO(String engineerID, String role, String firstName, String lastName) {
 
-            UserId = userId;
+
             EngineerID = engineerID;
-            Role = role;
-            FirstName = firstName;
-            LastName = lastName;
+
         }
 
-        public String getUserId() {
-            return UserId;
-        }
-
-        public void setUserId(String userId) {
-            UserId = userId;
-        }
 
         public String getEngineerID() {
             return EngineerID;
@@ -105,28 +86,7 @@ public class LoginTask {
             EngineerID = engineerID;
         }
 
-        public String getRole() {
-            return Role;
-        }
 
-        public void setRole(String role) {
-            Role = role;
-        }
 
-        public String getFirstName() {
-            return FirstName;
-        }
-
-        public void setFirstName(String firstName) {
-            FirstName = firstName;
-        }
-
-        public String getLastName() {
-            return LastName;
-        }
-
-        public void setLastName(String lastName) {
-            LastName = lastName;
-        }
     }
 }
