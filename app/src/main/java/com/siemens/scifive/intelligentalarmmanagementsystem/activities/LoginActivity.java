@@ -73,14 +73,14 @@ public class LoginActivity extends AppCompatActivity {
                 //AND ACCORDINGLY WE WILL SWITCH THE WINDOW (ADMIN OR USER)
 
                 //MEANWHILE WE WILL CONSIDER THAT 'A USER' HAS LOGGED IN
-                //loginUser();
+                loginUser();
 
                 //STEP 1 : create string attributes
-                String EngID = etLAEngineerID.getText().toString().trim();
+                String engineerId = etLAEngineerID.getText().toString().trim();
                 String password = etLAPassword.getText().toString().trim();
 
                 //step 2: call webservice
-                LoginTask.fireWSCall(mCtx, new LoginTask.RequestDTO(EngID), new GenericWSCallback() {
+                /*LoginTask.fireWSCall(mCtx, new LoginTask.RequestDTO(engineerId, password), new GenericWSCallback() {
                     @Override
                     public void onPreExecuteIon() {
                         MyProgressDialog.showPleaseWait(mCtx);
@@ -106,26 +106,19 @@ public class LoginActivity extends AppCompatActivity {
                     public void onSuccess(Object o) {
                         LoginTask.ResponseDTO responseDTO = (LoginTask.ResponseDTO) o;
 
-                        if (responseDTO.getEngID().equals(etLAEngineerID.getText().toString().trim())){
-                            Intent i = new Intent(LoginActivity.this, UserHomeActivity.class);
-                            startActivity(i);
-                        }else{
+                        MyStorage.getInstance().setEngineerID(responseDTO.getEngineerID());
 
-                        }
-
-                       MyStorage.getInstance().setEngID(responseDTO.getEngID());
-
-                        /*if (responseDTO.getRole().equals("ADMIN"))
+                        if (responseDTO.getRole().equals("ADMIN"))
                         {
                             //OPEN ADMIN ACTIVITY
                         }else {
                             //OPEN USER ACTIVITY
                             Intent i = new Intent(LoginActivity.this, UserHomeActivity.class);
                             startActivity(i);
-                        }*/
+                        }
 
                     }
-                });
+                });*/
 
 
             }

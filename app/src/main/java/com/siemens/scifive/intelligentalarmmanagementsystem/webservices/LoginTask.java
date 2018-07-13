@@ -40,41 +40,93 @@ public class LoginTask {
     }
 
     public static class RequestDTO {
-        String EngID;
+        String EngineerId;
+        String Password;
 
-        public String getEngID() {
-            return EngID;
+        public String getEngineerId() {
+            return EngineerId;
         }
 
-        public void setEngID(String engID) {
-            EngID = engID;
+        public void setEngineerId(String engineerId) {
+            EngineerId = engineerId;
+        }
+
+        public String getPassword() {
+            return Password;
+        }
+
+        public void setPassword(String password) {
+            Password = password;
         }
 
         public RequestDTO() {
+
         }
 
-        public RequestDTO(String engID) {
+        public RequestDTO(String engineerId, String password) {
 
-            EngID = engID;
+            EngineerId = engineerId;
+            Password = password;
         }
     }
 
     public static class ResponseDTO{
-        String EngID;
-
-        public ResponseDTO(String engID) {
-            EngID = engID;
-        }
+        String UserId;
+        String EngineerID;//z003ur5s
+        String Role;
+        String FirstName;
+        String LastName;
 
         public ResponseDTO() {
         }
 
-        public String getEngID() {
-            return EngID;
+        public ResponseDTO(String userId, String engineerID, String role, String firstName, String lastName) {
+
+            UserId = userId;
+            EngineerID = engineerID;
+            Role = role;
+            FirstName = firstName;
+            LastName = lastName;
         }
 
-        public void setEngID(String engID) {
-            EngID = engID;
+        public String getUserId() {
+            return UserId;
+        }
+
+        public void setUserId(String userId) {
+            UserId = userId;
+        }
+
+        public String getEngineerID() {
+            return EngineerID;
+        }
+
+        public void setEngineerID(String engineerID) {
+            EngineerID = engineerID;
+        }
+
+        public String getRole() {
+            return Role;
+        }
+
+        public void setRole(String role) {
+            Role = role;
+        }
+
+        public String getFirstName() {
+            return FirstName;
+        }
+
+        public void setFirstName(String firstName) {
+            FirstName = firstName;
+        }
+
+        public String getLastName() {
+            return LastName;
+        }
+
+        public void setLastName(String lastName) {
+            LastName = lastName;
         }
     }
 }
