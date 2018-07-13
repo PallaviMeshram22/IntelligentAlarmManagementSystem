@@ -29,7 +29,6 @@ public class UserHomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_home);
         INSTANCE = this;
-
         fLAUHFragmentContainer = findViewById(R.id.fLAUHFragmentContainer);
         tLAUHTabs = findViewById(R.id.tLAUHTabs);
 

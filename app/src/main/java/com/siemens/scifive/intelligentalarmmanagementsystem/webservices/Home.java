@@ -6,15 +6,22 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
+import com.siemens.scifive.intelligentalarmmanagementsystem.dtos.Alarm;
 import com.siemens.scifive.intelligentalarmmanagementsystem.interfaces.GenericWSCallback;
 
-public class LoginTask {
+import java.util.List;
+
+import static java.lang.System.load;
+
+public class Home {
+
+
     public static void fireWSCall(Context mCtx, RequestDTO requestDTO, final GenericWSCallback c) {
         c.onPreExecuteIon();
 
         Ion
                 .with(mCtx)
-                .load(WSUrls.LOGIN)                 //WILL CHANGE
+                .load(WSUrls.HOME)                 //WILL CHANGE
                 .setJsonPojoBody(requestDTO)
                 //.setStringBody(new Gson().toJson(requestDTO))
                 .asString()
@@ -28,7 +35,7 @@ public class LoginTask {
                             return;
                         }
                         try {
-                            ResponseDTO responseDTO = new Gson().fromJson(result, ResponseDTO.class);
+                            LoginTask.ResponseDTO responseDTO = new Gson().fromJson(result, LoginTask.ResponseDTO.class);
                             c.onSuccess(responseDTO);
                         } catch (JsonSyntaxException e1) {
                             e1.printStackTrace();
@@ -39,8 +46,14 @@ public class LoginTask {
 
     }
 
-    public static class RequestDTO {
+
+    public static class RequestDTO
+    {
         String EngID;
+
+        public RequestDTO(String engID) {
+            EngID = engID;
+        }
 
         public String getEngID() {
             return EngID;
@@ -53,28 +66,39 @@ public class LoginTask {
         public RequestDTO() {
         }
 
-        public RequestDTO(String engID) {
-
-            EngID = engID;
+        /*public RequestDTO(String engineerId) {
+            this.engineerId = engineerId;
         }
+
+        public RequestDTO() {
+        }
+
+        public String getEngineerId() {
+            return engineerId;
+        }
+
+        public void setEngineerId(String engineerId) {
+            this.engineerId = engineerId;
+        }*/
     }
 
-    public static class ResponseDTO{
-        String EngID;
+    public static class ResponseDTO
+    {
+        List<Alarm> alarms;
 
-        public ResponseDTO(String engID) {
-            EngID = engID;
+        public ResponseDTO(List<Alarm> alarms) {
+            this.alarms = alarms;
         }
 
         public ResponseDTO() {
         }
 
-        public String getEngID() {
-            return EngID;
+        public List<Alarm> getAlarms() {
+            return alarms;
         }
 
-        public void setEngID(String engID) {
-            EngID = engID;
+        public void setAlarms(List<Alarm> alarms) {
+            this.alarms = alarms;
         }
     }
 }

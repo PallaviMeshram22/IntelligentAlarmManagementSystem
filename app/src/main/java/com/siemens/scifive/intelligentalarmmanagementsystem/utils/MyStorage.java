@@ -10,13 +10,13 @@ public class MyStorage {
         return INSTANCE;
     }
 
-    private String EngineerID;
+    private String EngID;
 
-    public String getEngineerID() {
-        return EngineerID;
+    public String getEngID() {
+        return EngID;
     }
 
-    public void setEngineerID(String engineerID) {
-        EngineerID = engineerID;
+    public void setEngID(String engID) {
+        EngID = engID;
     }
 }

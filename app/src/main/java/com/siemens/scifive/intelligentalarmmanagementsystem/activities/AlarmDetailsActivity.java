@@ -32,12 +32,14 @@ public class AlarmDetailsActivity extends AppCompatActivity {
         Alarm selectedAlarm = new Gson().fromJson(selectedAlarmJSON, Alarm.class);
 
         StringBuilder s = new StringBuilder();
-        s.append("Short description of alarm id : ").append(selectedAlarm.getAlarmId()).append("\n");
-        s.append("Equipment id : ").append(selectedAlarm.getEquipmentId()).append("\n");
+        s.append("Short description of alarm id : ").append(selectedAlarm.getEntryID()).append("\n");
+        s.append("Equipment id : ").append(selectedAlarm.getEquipID()).append("\n");
         s.append("Error Type : ").append(selectedAlarm.getErrorCode()).append("\n");
 
         tvAADAlarmDescription.setText(s.toString());
 
+
+        //bAADAccept.setOnClickListener();
 
 
         bAADCancle.setOnClickListener(new View.OnClickListener() {
@@ -46,6 +48,8 @@ public class AlarmDetailsActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+
 
 
     }

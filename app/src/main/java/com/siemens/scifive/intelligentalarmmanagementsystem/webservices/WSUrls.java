@@ -9,4 +9,6 @@ class WSUrls {
 
     //WS URLS
     public static String LOGIN = BASE_URL + "login";// ( http://18.191.148.218:80/login )
+
+    public static String HOME = BASE_URL + "home";//(http://18.191.148.218:80/home)
 }

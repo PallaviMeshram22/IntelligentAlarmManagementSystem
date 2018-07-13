@@ -51,12 +51,12 @@ public class AlarmsListAdapter extends BaseAdapter {
 
         final Alarm a = (Alarm) getItem(position);
 
-        h.tvALILAlarmId.setText(a.getAlarmId());
-        h.tvALILAssignedDate.setText(a.getAssignDate());
-        h.tvALILEqptId.setText(a.getEquipmentId());
+        h.tvALILAlarmId.setText(a.getEntryID());
+        h.tvALILAssignedDate.setText(a.getEngID());
+        h.tvALILEqptId.setText(a.getEquipID());
         h.tvALILCurrentStatus.setText(a.getCurrentStatus());
         h.tvALILErrorId.setText(a.getErrorCode());
-        h.tvALILRaisedDate.setText(a.getAssignDate());
+        h.tvALILRaisedDate.setText(a.getRaisedDate());
 
         v.setOnClickListener(new View.OnClickListener() {
             @Override

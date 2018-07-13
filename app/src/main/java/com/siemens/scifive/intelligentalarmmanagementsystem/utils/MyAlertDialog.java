@@ -12,6 +12,8 @@ public class MyAlertDialog {
         builder.setMessage(message);
     }
 
+    //public static void show(Context mCtx, )
+
     public static void showNetworkErrorDialog(Context mCtx) {
         prepare(mCtx, "Network Error", "There is some error with your internet, Please try again later");
         builder.show();

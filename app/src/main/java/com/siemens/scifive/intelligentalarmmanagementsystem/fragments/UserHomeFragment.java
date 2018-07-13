@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.siemens.scifive.intelligentalarmmanagementsystem.R;
@@ -21,10 +20,7 @@ import com.siemens.scifive.intelligentalarmmanagementsystem.interfaces.GenericWS
 import com.siemens.scifive.intelligentalarmmanagementsystem.utils.MyAlertDialog;
 import com.siemens.scifive.intelligentalarmmanagementsystem.utils.MyProgressDialog;
 import com.siemens.scifive.intelligentalarmmanagementsystem.utils.MyStorage;
-import com.siemens.scifive.intelligentalarmmanagementsystem.webservices.AlarmListTask;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.siemens.scifive.intelligentalarmmanagementsystem.webservices.Home;
 
 public class UserHomeFragment extends Fragment {
 
@@ -58,9 +54,9 @@ public class UserHomeFragment extends Fragment {
         //THIS MUCH DUMMY DATA IS ENOUGH*/
         //</editor-fold>
 
-        String engineerId = MyStorage.getInstance().getEngineerID();
+        String EngID = MyStorage.getInstance().getEngID();
 
-        AlarmListTask.fireWSCall(mCtx, new AlarmListTask.RequestDTO(engineerId), new GenericWSCallback() {
+        Home.fireWSCall(mCtx, new Home.RequestDTO(EngID), new GenericWSCallback() {
             @Override
             public void onPreExecuteIon() {
                 MyProgressDialog.showPleaseWait(mCtx);
@@ -85,7 +81,7 @@ public class UserHomeFragment extends Fragment {
 
             @Override
             public void onSuccess(Object o) {
-                AlarmListTask.ResponseDTO responseDTO = (AlarmListTask.ResponseDTO) o;
+                Home.ResponseDTO responseDTO = (Home.ResponseDTO) o;
 
                 AlarmsListAdapter adapter = new AlarmsListAdapter(mCtx, responseDTO.getAlarms(), new AlarmsListAdapter.ALACallbacks() {
                     @Override
