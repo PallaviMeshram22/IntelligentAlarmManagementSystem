@@ -45,18 +45,20 @@ public class UserHomeFragment extends Fragment {
 
         lvFUHAlarmsList = v.findViewById(R.id.lvFUHAlarmsList);//connecting our views with the ones in XML
         //<editor-fold desc="DISABLED CODE">
-/*
+
         List<Alarm> alarms = new ArrayList<>();
         //WE ARE MAKING A DUMMY LIST (WE ARE GOIND TO DELETE THIS)
-        alarms.add(new Alarm("1", "101", "EQ_01", "10-7-2018", "11-7-2018", "Failed"));
-        alarms.add(new Alarm("2", "102", "EQ_02", "11-7-2018", "12-7-2018", "Failure"));
-        alarms.add(new Alarm("3", "103", "EQ_03", "12-7-2018", "13-7-2018", "Failed"));
+        alarms.add(new Alarm("3", "ER003", "EQ03", "2018-07-10", " ","Open"));
+        alarms.add(new Alarm("4", "ER004", "EQ05", "2018-07-10", " ","Open"));
+        alarms.add(new Alarm("7", "ER007", "EQ03", "2018-07-10", " ","Open"));
         //THIS MUCH DUMMY DATA IS ENOUGH*/
         //</editor-fold>
 
-        String EngID = MyStorage.getInstance().getEngID();
+        //String EngID = MyStorage.getInstance().getEngID();
 
-        Home.fireWSCall(mCtx, new Home.RequestDTO(EngID), new GenericWSCallback() {
+        /*Home.fireWSCall(mCtx, new Home.RequestDTO(EngID), new GenericWSCallback()
+         {
+
             @Override
             public void onPreExecuteIon() {
                 MyProgressDialog.showPleaseWait(mCtx);
@@ -99,7 +101,7 @@ public class UserHomeFragment extends Fragment {
 
 
             }
-        });
+        }); */
 
 
         return v;

@@ -76,11 +76,11 @@ public class LoginActivity extends AppCompatActivity {
                 loginUser();
 
                 //STEP 1 : create string attributes
-                String engineerId = etLAEngineerID.getText().toString().trim();
+                final String EngID = etLAEngineerID.getText().toString().trim();
                 String password = etLAPassword.getText().toString().trim();
 
                 //step 2: call webservice
-                /*LoginTask.fireWSCall(mCtx, new LoginTask.RequestDTO(engineerId, password), new GenericWSCallback() {
+                LoginTask.fireWSCall(mCtx, new LoginTask.RequestDTO(EngID), new GenericWSCallback() {
                     @Override
                     public void onPreExecuteIon() {
                         MyProgressDialog.showPleaseWait(mCtx);
@@ -106,19 +106,21 @@ public class LoginActivity extends AppCompatActivity {
                     public void onSuccess(Object o) {
                         LoginTask.ResponseDTO responseDTO = (LoginTask.ResponseDTO) o;
 
-                        MyStorage.getInstance().setEngineerID(responseDTO.getEngineerID());
+                        MyStorage.getInstance().setEngID(responseDTO.getEngId());
 
-                        if (responseDTO.getRole().equals("ADMIN"))
+                        if (responseDTO.getEngId().equals(EngID))
                         {
                             //OPEN ADMIN ACTIVITY
-                        }else {
-                            //OPEN USER ACTIVITY
                             Intent i = new Intent(LoginActivity.this, UserHomeActivity.class);
                             startActivity(i);
+                        }else {
+                            //OPEN USER ACTIVITY
+                            //Intent i = new Intent(LoginActivity.this, UserHomeActivity.class);
+                            //startActivity(i);
                         }
 
                     }
-                });*/
+                });
 
 
             }

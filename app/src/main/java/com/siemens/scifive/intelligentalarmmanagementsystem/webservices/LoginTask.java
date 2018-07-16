@@ -40,10 +40,26 @@ public class LoginTask {
     }
 
     public static class RequestDTO {
-        String EngineerId;
-        String Password;
+        String EngID;
 
-        public String getEngineerId() {
+        public RequestDTO(String engID) {
+            EngID = engID;
+        }
+
+        public String getEngID() {
+            return EngID;
+        }
+
+        public void setEngID(String engID) {
+            EngID = engID;
+        }
+
+        public RequestDTO() {
+        }
+
+        // String Password;
+
+        /*public String getEngineerId() {
             return EngineerId;
         }
 
@@ -67,66 +83,27 @@ public class LoginTask {
 
             EngineerId = engineerId;
             Password = password;
-        }
+        }*/
     }
 
     public static class ResponseDTO{
-        String UserId;
-        String EngineerID;//z003ur5s
-        String Role;
-        String FirstName;
-        String LastName;
+        String EngId;
 
         public ResponseDTO() {
         }
 
-        public ResponseDTO(String userId, String engineerID, String role, String firstName, String lastName) {
-
-            UserId = userId;
-            EngineerID = engineerID;
-            Role = role;
-            FirstName = firstName;
-            LastName = lastName;
+        public String getEngId() {
+            return EngId;
         }
 
-        public String getUserId() {
-            return UserId;
+        public void setEngId(String engId) {
+            EngId = engId;
         }
 
-        public void setUserId(String userId) {
-            UserId = userId;
+        public ResponseDTO(String engId) {
+            EngId = engId;
         }
 
-        public String getEngineerID() {
-            return EngineerID;
-        }
 
-        public void setEngineerID(String engineerID) {
-            EngineerID = engineerID;
-        }
-
-        public String getRole() {
-            return Role;
-        }
-
-        public void setRole(String role) {
-            Role = role;
-        }
-
-        public String getFirstName() {
-            return FirstName;
-        }
-
-        public void setFirstName(String firstName) {
-            FirstName = firstName;
-        }
-
-        public String getLastName() {
-            return LastName;
-        }
-
-        public void setLastName(String lastName) {
-            LastName = lastName;
-        }
     }
 }
