@@ -8,12 +8,24 @@
         android:id="@+id/tvADLILDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
 
     <Button
         android:id="@+id/bADLILResolved"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
         android:text="Resolved" />
+    <Button
+        android:id="@+id/bADLILMap"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="Map" />
+</LinearLayout>
 
 
 </LinearLayout>

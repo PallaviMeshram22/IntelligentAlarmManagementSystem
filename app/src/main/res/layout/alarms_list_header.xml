@@ -60,6 +60,18 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:lines="1"
+        android:text="Assigned Dt" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/colorBlack" />
+
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:lines="1"
         android:text="Current Stats" />
 
     <View

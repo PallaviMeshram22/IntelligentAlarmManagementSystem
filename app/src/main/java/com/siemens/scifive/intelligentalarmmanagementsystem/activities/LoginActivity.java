@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,7 +15,9 @@ import android.widget.Toast;
 
 import com.siemens.scifive.intelligentalarmmanagementsystem.Manifest;
 import com.siemens.scifive.intelligentalarmmanagementsystem.R;
+import com.siemens.scifive.intelligentalarmmanagementsystem.dtos.User;
 import com.siemens.scifive.intelligentalarmmanagementsystem.interfaces.GenericWSCallback;
+import com.siemens.scifive.intelligentalarmmanagementsystem.utils.Constants;
 import com.siemens.scifive.intelligentalarmmanagementsystem.utils.MyAlertDialog;
 import com.siemens.scifive.intelligentalarmmanagementsystem.utils.MyProgressDialog;
 import com.siemens.scifive.intelligentalarmmanagementsystem.utils.MyStorage;
@@ -73,14 +76,24 @@ public class LoginActivity extends AppCompatActivity {
                 //AND ACCORDINGLY WE WILL SWITCH THE WINDOW (ADMIN OR USER)
 
                 //MEANWHILE WE WILL CONSIDER THAT 'A USER' HAS LOGGED IN
-                loginUser();
+                //loginUser();
 
                 //STEP 1 : create string attributes
                 final String EngID = etLAEngineerID.getText().toString().trim();
                 String password = etLAPassword.getText().toString().trim();
 
+                User user = Constants.getUser(EngID, password);
+                if (user==null){
+                    Toast.makeText(mCtx, "Wrong Credentials", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Log.d("ShraX", "user = "+user.getUserId());
+                MyStorage.getInstance().setCurrentUser(user);
+                loginUser();
+
                 //step 2: call webservice
-                LoginTask.fireWSCall(mCtx, new LoginTask.RequestDTO(EngID), new GenericWSCallback() {
+                //<editor-fold desc="WEBSERVICE CALL">
+                /*LoginTask.fireWSCall(mCtx, new LoginTask.RequestDTO(EngID), new GenericWSCallback() {
                     @Override
                     public void onPreExecuteIon() {
                         MyProgressDialog.showPleaseWait(mCtx);
@@ -120,7 +133,10 @@ public class LoginActivity extends AppCompatActivity {
                         }
 
                     }
-                });
+                });*/
+                //</editor-fold>
+
+
 
 
             }
@@ -131,5 +147,6 @@ public class LoginActivity extends AppCompatActivity {
     private void loginUser() {
         Intent i = new Intent(LoginActivity.this, UserHomeActivity.class);
         startActivity(i);
+        finish();
     }
 }

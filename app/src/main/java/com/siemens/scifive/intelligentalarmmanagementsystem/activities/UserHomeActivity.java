@@ -17,7 +17,7 @@ import com.siemens.scifive.intelligentalarmmanagementsystem.fragments.UserLocati
 public class UserHomeActivity extends AppCompatActivity {
     private static UserHomeActivity INSTANCE = null;
     FrameLayout fLAUHFragmentContainer;
-    TabLayout tLAUHTabs;
+    public TabLayout tLAUHTabs;
     FragmentManager fragmentManager;
 
     public static UserHomeActivity getInstance() {
@@ -39,7 +39,7 @@ public class UserHomeActivity extends AppCompatActivity {
         changeFragment(UserHomeFragment.getInstance(), true);
     }
 
-    private void changeFragment(Fragment fragment, boolean isFirst) {
+    public void changeFragment(Fragment fragment, boolean isFirst) {
         if (isFirst) {
             //DONT ADD TO BACKSTACK
             getSupportFragmentManager()

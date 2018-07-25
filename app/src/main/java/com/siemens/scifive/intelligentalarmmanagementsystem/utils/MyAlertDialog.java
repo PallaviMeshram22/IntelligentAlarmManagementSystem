@@ -23,4 +23,9 @@ public class MyAlertDialog {
         prepare(mCtx, "Data error", "Data error please contact with admin\nError : "+e.getMessage());
         builder.show();
     }
+
+    public static void show(Context mCtx, String title, String message) {
+        prepare(mCtx, title, message);
+        builder.show();
+    }
 }

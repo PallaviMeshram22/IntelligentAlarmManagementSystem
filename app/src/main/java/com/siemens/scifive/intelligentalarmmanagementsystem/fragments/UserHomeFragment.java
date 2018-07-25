@@ -14,13 +14,16 @@ import android.widget.ListView;
 import com.google.gson.Gson;
 import com.siemens.scifive.intelligentalarmmanagementsystem.R;
 import com.siemens.scifive.intelligentalarmmanagementsystem.activities.AlarmDetailsActivity;
+import com.siemens.scifive.intelligentalarmmanagementsystem.activities.UserHomeActivity;
 import com.siemens.scifive.intelligentalarmmanagementsystem.adapters.AlarmsListAdapter;
 import com.siemens.scifive.intelligentalarmmanagementsystem.dtos.Alarm;
-import com.siemens.scifive.intelligentalarmmanagementsystem.interfaces.GenericWSCallback;
-import com.siemens.scifive.intelligentalarmmanagementsystem.utils.MyAlertDialog;
-import com.siemens.scifive.intelligentalarmmanagementsystem.utils.MyProgressDialog;
+import com.siemens.scifive.intelligentalarmmanagementsystem.utils.Constants;
 import com.siemens.scifive.intelligentalarmmanagementsystem.utils.MyStorage;
-import com.siemens.scifive.intelligentalarmmanagementsystem.webservices.Home;
+
+import java.util.List;
+
+import static android.app.Activity.RESULT_OK;
+import static com.siemens.scifive.intelligentalarmmanagementsystem.activities.AlarmDetailsActivity.ALARM_DETAILS_ACTIVITY_RETURNING_DATA;
 
 public class UserHomeFragment extends Fragment {
 
@@ -29,6 +32,7 @@ public class UserHomeFragment extends Fragment {
     private Context mCtx;
 
     public static final String SELECTED_ALARM_JSON_INTENT_EXTRA = "SELECTED_ALARM_JSON_INTENT_EXTRA";
+    public static final int ALARM_DETAILS_ACTIVITY_REQUEST_CODE = 101;
 
     public static UserHomeFragment getInstance() {
         if (INSTANCE == null) {
@@ -40,22 +44,28 @@ public class UserHomeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        UserHomeActivity.getInstance().tLAUHTabs.getTabAt(0).select();
         mCtx = container.getContext();
         View v = inflater.inflate(R.layout.fragment_user_home, container, false);
 
         lvFUHAlarmsList = v.findViewById(R.id.lvFUHAlarmsList);//connecting our views with the ones in XML
-        //<editor-fold desc="DISABLED CODE">
 
-        List<Alarm> alarms = new ArrayList<>();
-        //WE ARE MAKING A DUMMY LIST (WE ARE GOIND TO DELETE THIS)
-        alarms.add(new Alarm("3", "ER003", "EQ03", "2018-07-10", " ","Open"));
-        alarms.add(new Alarm("4", "ER004", "EQ05", "2018-07-10", " ","Open"));
-        alarms.add(new Alarm("7", "ER007", "EQ03", "2018-07-10", " ","Open"));
-        //THIS MUCH DUMMY DATA IS ENOUGH*/
-        //</editor-fold>
+        List<Alarm> alarms = Constants.getAlarmsList(MyStorage.getInstance().getUser());
+        AlarmsListAdapter adapter = new AlarmsListAdapter(mCtx, alarms, new AlarmsListAdapter.ALACallbacks() {
+            @Override
+            public void OnClickedItem(Alarm selectedAlarm, int position) {
+                Intent i = new Intent(mCtx, AlarmDetailsActivity.class);
+                String selectedAlarmJSON = new Gson().toJson(selectedAlarm);
+                i.putExtra(SELECTED_ALARM_JSON_INTENT_EXTRA, selectedAlarmJSON);
+                startActivityForResult(i, ALARM_DETAILS_ACTIVITY_REQUEST_CODE);
+            }
+        });
+        lvFUHAlarmsList.setAdapter(adapter);
+
 
         //String EngID = MyStorage.getInstance().getEngID();
 
+        //<editor-fold desc="WEBSERVICE CALL">
         /*Home.fireWSCall(mCtx, new Home.RequestDTO(EngID), new GenericWSCallback()
          {
 
@@ -102,8 +112,26 @@ public class UserHomeFragment extends Fragment {
 
             }
         }); */
+        //</editor-fold>
 
 
         return v;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode==RESULT_OK){
+            if(requestCode==ALARM_DETAILS_ACTIVITY_REQUEST_CODE){
+                String activityResult = data.getStringExtra(ALARM_DETAILS_ACTIVITY_RETURNING_DATA );
+
+                if (activityResult.equals("OK")){
+                    //change to third fragment
+                    UserHomeActivity.getInstance().changeFragment(AlarmDetailsFragment.getInstance(), false);
+                }
+
+
+            }
+        }
     }
 }

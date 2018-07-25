@@ -12,12 +12,12 @@ import com.siemens.scifive.intelligentalarmmanagementsystem.dtos.Alarm;
 
 import java.util.List;
 
-public class AlarmsListAdapter extends BaseAdapter {
+public class AlarmsHistoryListAdapter extends BaseAdapter {
     Context mCtx;
     List<Alarm> alarms;
     ALACallbacks c;
 
-    public AlarmsListAdapter(Context mCtx, List<Alarm> alarms, ALACallbacks c) {
+    public AlarmsHistoryListAdapter(Context mCtx, List<Alarm> alarms, ALACallbacks c) {
         this.mCtx = mCtx;
         this.alarms = alarms;
         this.c = c;

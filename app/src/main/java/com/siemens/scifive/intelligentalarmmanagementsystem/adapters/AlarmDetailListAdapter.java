@@ -1,4 +1,4 @@
-package com.siemens.scifive.intelligentalarmmanagementsystem.dtos;
+package com.siemens.scifive.intelligentalarmmanagementsystem.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,18 +10,20 @@ import android.widget.TextView;
 
 import com.siemens.scifive.intelligentalarmmanagementsystem.R;
 import com.siemens.scifive.intelligentalarmmanagementsystem.adapters.AlarmsListAdapter;
+import com.siemens.scifive.intelligentalarmmanagementsystem.dtos.Alarm;
 
 import java.util.List;
 
 public class AlarmDetailListAdapter extends BaseAdapter {
     Context mCtx;
-    List<AlarmDetail> alarmDetails;
+    List<Alarm> alarmDetails;
     ADLACallbacks c;
 
     public interface ADLACallbacks {
-        public void OnResolvedButtonClick(AlarmDetail selectedAlarmDetail);
+        public void OnResolvedButtonClick(Alarm selectedAlarmDetail, int position);
+        public void OnMapButtonClick(Alarm selectedAlarmDetail, int position);
     }
-    public AlarmDetailListAdapter(Context mCtx, List<AlarmDetail> alarmDetails, ADLACallbacks c) {
+    public AlarmDetailListAdapter(Context mCtx, List<Alarm> alarmDetails, ADLACallbacks c) {
         this.mCtx = mCtx;
         this.alarmDetails = alarmDetails;
         this.c=c;
@@ -43,7 +45,7 @@ public class AlarmDetailListAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View v, ViewGroup parent) {
+    public View getView(final int position, View v, ViewGroup parent) {
         ADLAViewHolder h;
         if (v == null) {
             v = LayoutInflater.from(mCtx).inflate(R.layout.alarm_details_list_item_layout, parent, false);
@@ -53,22 +55,29 @@ public class AlarmDetailListAdapter extends BaseAdapter {
             h = (ADLAViewHolder) v.getTag();
         }
 
-        final AlarmDetail d = (AlarmDetail) getItem(position);
+        final Alarm d = (Alarm) getItem(position);
 
         StringBuilder s = new StringBuilder();
-        s.append("Detail description of alarm id : ").append(d.getAlarmId()).append("\n");
-        s.append("Equipment id : ").append(d.getEquipmentId()).append("\n");
+        s.append("Detail description of alarm id : ").append(d.getEntryID()).append("\n");
+        s.append("Equipment id : ").append(d.getEquipID()).append("\n");
         s.append("Error code : ").append(d.getErrorCode()).append("\n");
         s.append("current Status : ").append(d.getCurrentStatus()).append("\n");
-        s.append("Troubleshooting Steps : ").append(d.getTroubleshootingSteps()).append("\n");
-        s.append("Tools : ").append(d.getTools()).append("\n");
+        s.append("Troubleshooting Steps : ").append(d.getTroubleshootingStepsCompany()).append("\n");
+        s.append("Tools : ").append(d.getToolsCompany()).append("\n");
 
         h.tvADLILDescription.setText(s.toString());
 
         h.bADLILResolved.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                c.OnResolvedButtonClick(d);
+                c.OnResolvedButtonClick(d, position);
+            }
+        });
+
+        h.bADLILMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                c.OnMapButtonClick(d, position);
             }
         });
 
@@ -77,11 +86,12 @@ public class AlarmDetailListAdapter extends BaseAdapter {
 
     static class ADLAViewHolder {
         TextView tvADLILDescription;
-        Button bADLILResolved;
+        Button bADLILResolved, bADLILMap;
 
         public ADLAViewHolder(View v) {
             tvADLILDescription = v.findViewById(R.id.tvADLILDescription);
             bADLILResolved = v.findViewById(R.id.bADLILResolved);
+            bADLILMap = v.findViewById(R.id.bADLILMap);
         }
     }
 }
